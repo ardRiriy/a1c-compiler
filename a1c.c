@@ -7,7 +7,7 @@ int main(int argc, char **argv){
         return 1;
     }
 
-    //第2引数を指すポインタ
+    //*pは第2引数の一文字目を指すポインタ
     char *p = argv[1];
 
     printf(".intel_syntax noprefix\n");
@@ -18,17 +18,20 @@ int main(int argc, char **argv){
     while(*p){
 
         if(*p == '+' ){
-            p++; //次の文字へ移動
+            //次の文字へ
+            p++; 
             printf("  add rax, %ld\n", strtol(p, &p, 10));
             continue;
         }
 
         if (*p == '-'){
+            //次の文字へ
             p++;
             printf("  sub rax, %ld\n", strtol(p, &p, 10));
             continue;
         }
 
+        //エラー処理
         fprintf(stderr, "予期しない文字です: '%c'\n", *p);
         return 1;
     }
